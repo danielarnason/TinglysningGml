@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QIcon, QFileDialog
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -171,6 +171,8 @@ class TinglysningGml:
         self.set_time()
         self.set_methods()
 
+        self.dlg.pushButton_3.clicked.connect(self.select_output_file)
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -190,6 +192,9 @@ class TinglysningGml:
         methods = [k for k in methods_dict]
         self.dlg.comboBox.addItems(methods)
 
+    def select_output_file(self):
+        self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', '', '*.gml')
+        self.dlg.lineEdit_4.setText(self.output_filename)
 
     def run(self):
         """Run method that performs all the real work"""
