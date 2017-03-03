@@ -27,7 +27,7 @@ import resources
 # Import the code for the dialog
 from tinglysning_gml_dialog import TinglysningGmlDialog
 import os.path
-
+import datetime
 
 class TinglysningGml:
     """QGIS Plugin Implementation."""
@@ -168,6 +168,8 @@ class TinglysningGml:
             callback=self.run,
             parent=self.iface.mainWindow())
 
+        self.set_time()
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -178,6 +180,9 @@ class TinglysningGml:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
+
+    def set_time(self):
+        self.dlg.dateEdit.setDate(datetime.date.today())
 
 
     def run(self):
