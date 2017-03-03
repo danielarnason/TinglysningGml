@@ -28,6 +28,8 @@ import resources
 from tinglysning_gml_dialog import TinglysningGmlDialog
 import os.path
 import datetime
+# MySettings (qgissettingmanager)
+from tinglysning_gml_settings import MySettings
 
 class TinglysningGml:
     """QGIS Plugin Implementation."""
@@ -65,6 +67,15 @@ class TinglysningGml:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'TinglysningGml')
         self.toolbar.setObjectName(u'TinglysningGml')
+
+        # Instantiate MySettings
+        self.settings = MySettings()
+
+        # Producer info
+        # TODO Flyt de her informationer i MySettings, så man kan ændre de her værdier
+
+        self.cvrnr = '29188386'
+        self.organization = 'Egedal kommune'
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -170,6 +181,7 @@ class TinglysningGml:
 
         self.set_time()
         self.set_methods()
+        self.set_producer_info()
 
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
 
@@ -195,6 +207,10 @@ class TinglysningGml:
     def select_output_file(self):
         self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', '', '*.gml')
         self.dlg.lineEdit_4.setText(self.output_filename)
+
+    def set_producer_info(self):
+        self.dlg.lineEdit.setText(self.cvrnr)
+        self.dlg.lineEdit_2.setText(self.organization)
 
     def run(self):
         """Run method that performs all the real work"""
