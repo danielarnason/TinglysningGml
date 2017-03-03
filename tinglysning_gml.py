@@ -169,6 +169,7 @@ class TinglysningGml:
             parent=self.iface.mainWindow())
 
         self.set_time()
+        self.set_methods()
 
 
     def unload(self):
@@ -183,6 +184,11 @@ class TinglysningGml:
 
     def set_time(self):
         self.dlg.dateEdit.setDate(datetime.date.today())
+
+    def set_methods(self):
+        methods_dict = {'Absolut': 'A', 'Relativ': 'R', 'Relativ/Absolut': 'RA', 'Ejendom': 'E', 'Matrikel': 'M', 'Udefineret': 'U'}
+        methods = [k for k in methods_dict]
+        self.dlg.comboBox.addItems(methods)
 
 
     def run(self):
