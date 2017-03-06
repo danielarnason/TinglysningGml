@@ -20,9 +20,9 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant
 from PyQt4.QtGui import QAction, QIcon, QFileDialog
-from qgis.core import QgsMapLayerRegistry
+from qgis.core import QgsMapLayerRegistry, QgsField
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -204,9 +204,9 @@ class TinglysningGml:
         self.dlg.dateEdit.setDate(datetime.date.today())
 
     def set_methods(self):
-        methods_dict = {'Absolut': 'A', 'Relativ': 'R', 'Relativ/Absolut': 'RA', 'Ejendom': 'E', 'Matrikel': 'M', 'Udefineret': 'U'}
-        self.dlg.comboBox.addItems(methods_dict.keys())
-        self.dlg.comboBox.setCurrentIndex(methods_dict.keys().index('Matrikel'))
+        self.methods_dict = {'Absolut': 'A', 'Relativ': 'R', 'Relativ/Absolut': 'RA', 'Ejendom': 'E', 'Matrikel': 'M', 'Udefineret': 'U'}
+        self.dlg.comboBox.addItems(self.methods_dict.keys())
+        self.dlg.comboBox.setCurrentIndex(self.methods_dict.keys().index('Matrikel'))
 
     def select_output_file(self):
         self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', '', '*.gml')
@@ -217,8 +217,9 @@ class TinglysningGml:
         self.dlg.lineEdit_2.setText(self.organization)
 
     def set_layer_list(self):
-        lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
-        self.dlg.comboBox_2.addItems(lyrs)
+        self.lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
+        self.dlg.comboBox_2.addItems(self.lyrs)
+        self.cur_lyr = self.dlg.comboBox_2.currentText()
 
     def refresh_layer_list(self):
         self.dlg.comboBox_2.clear()
@@ -226,6 +227,38 @@ class TinglysningGml:
 
     def annuller_luk(self):
         self.dlg.close()
+
+    def gml_add_cols(self):
+        self.cur_lyr = self.dlg.comboBox_2.currentText()
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.cur_lyr:
+                res = lyr.dataProvider().addAttributes([QgsField('dato', QVariant.String),
+                                                        QgsField('noejagt', QVariant.Int),
+                                                        QgsField('metode', QVariant.String),
+                                                        QgsField('oprindelse', QVariant.String),
+                                                        QgsField('cvr', QVariant.Int),
+                                                        QgsField('org', QVariant.String),
+                                                        QgsField('esdh_nr', QVariant.String),
+                                                        QgsField('overkat', QVariant.String),
+                                                        QgsField('underkat', QVariant.String)
+                                                        ])
+                lyr.updateFields()
+
+    def set_values(self):
+        pass
+        # self.cur_lyr = self.dlg.comboBox_2.currentText()
+        # lyrs = QgsMapLayerRegistry.instance().mapLayers().values()
+        # for lyr in lyrs:
+        #     if lyr.name() == self.cur_lyr:
+        #         lyr.startEditing()
+        #         fields = lyr.pendingFields()
+        #         field_names = [field.name() for field in fields]
+        #         for field in field_names:
+        #             if field == 'cvr':
+        #                 lyr.changeAttributeValue()
+
+
+
 
     def run(self):
         """Run method that performs all the real work"""
