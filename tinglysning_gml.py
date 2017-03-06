@@ -22,6 +22,7 @@
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon, QFileDialog
+from qgis.core import QgsMapLayerRegistry
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -182,8 +183,11 @@ class TinglysningGml:
         self.set_time()
         self.set_methods()
         self.set_producer_info()
+        self.set_layer_list()
 
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
+        self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
+        self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
 
 
     def unload(self):
@@ -211,6 +215,17 @@ class TinglysningGml:
     def set_producer_info(self):
         self.dlg.lineEdit.setText(self.cvrnr)
         self.dlg.lineEdit_2.setText(self.organization)
+
+    def set_layer_list(self):
+        lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
+        self.dlg.comboBox_2.addItems(lyrs)
+
+    def refresh_layer_list(self):
+        self.dlg.comboBox_2.clear()
+        self.set_layer_list()
+
+    def annuller_luk(self):
+        self.dlg.close()
 
     def run(self):
         """Run method that performs all the real work"""
