@@ -201,8 +201,8 @@ class TinglysningGml:
 
     def set_methods(self):
         methods_dict = {'Absolut': 'A', 'Relativ': 'R', 'Relativ/Absolut': 'RA', 'Ejendom': 'E', 'Matrikel': 'M', 'Udefineret': 'U'}
-        methods = [k for k in methods_dict]
-        self.dlg.comboBox.addItems(methods)
+        self.dlg.comboBox.addItems(methods_dict.keys())
+        self.dlg.comboBox.setCurrentIndex(methods_dict.keys().index('Matrikel'))
 
     def select_output_file(self):
         self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', '', '*.gml')
