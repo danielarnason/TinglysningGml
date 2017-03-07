@@ -32,6 +32,8 @@ import datetime
 # MySettings (qgissettingmanager)
 from tinglysning_gml_settings import MySettings
 
+import processing
+
 class TinglysningGml:
     """QGIS Plugin Implementation."""
 
@@ -189,6 +191,8 @@ class TinglysningGml:
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
 
+        self.dlg.pushButton.clicked.connect(self.set_values)
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -245,17 +249,23 @@ class TinglysningGml:
                 lyr.updateFields()
 
     def set_values(self):
-        pass
-        # self.cur_lyr = self.dlg.comboBox_2.currentText()
-        # lyrs = QgsMapLayerRegistry.instance().mapLayers().values()
-        # for lyr in lyrs:
-        #     if lyr.name() == self.cur_lyr:
-        #         lyr.startEditing()
-        #         fields = lyr.pendingFields()
-        #         field_names = [field.name() for field in fields]
-        #         for field in field_names:
-        #             if field == 'cvr':
-        #                 lyr.changeAttributeValue()
+        self.cur_lyr = self.dlg.comboBox_2.currentText()
+
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.cur_lyr:
+
+                dato_idx = lyr.fieldNameIndex('dato')
+                noejagt_idx = lyr.fieldNameIndex('noejagt')
+                metode_idx = lyr.fieldNameIndex('metode')
+                oprindelse_idx = lyr.fieldNameIndex('oprindelse')
+                cvr_idx = lyr.fieldNameIndex('cvr')
+                org_idx = lyr.fieldNameIndex('org')
+                esdh_nr_idx = lyr.fieldNameIndex('esdh_nr')
+                overkat_idx = lyr.fieldNameIndex('overkat')
+                underkat_idx = lyr.fieldNameIndex('underkat')
+
+                for feat in lyr.getFeatures():
+                    pass
 
 
 
