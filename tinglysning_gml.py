@@ -29,6 +29,7 @@ import resources
 from tinglysning_gml_dialog import TinglysningGmlDialog
 import os.path
 import datetime
+import unicodedata
 # MySettings (qgissettingmanager)
 from tinglysning_gml_settings import MySettings
 
@@ -186,14 +187,18 @@ class TinglysningGml:
         self.set_methods()
         self.set_producer_info()
         self.set_layer_list()
+        self.set_categories()
 
         # Pushbuttons
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
 
+
+        self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
+
         # Test nye methods knap!
-        # self.dlg.pushButton_5.clicked.connect(self.set_values)
+        self.dlg.pushButton_5.clicked.connect(self.set_values)
 
 
     def unload(self):
@@ -269,6 +274,8 @@ class TinglysningGml:
         elif self.dlg.radioButton_4.isChecked():
             oprindelse = 'KF'
 
+        overkat = unicodedata.normalize('NFKD', self.dlg.comboBox_3.currentText()).encode('ascii', 'ignore')
+        underkat = unicodedata.normalize('NFKD', self.dlg.comboBox_4.currentText()).encode('ascii', 'ignore')
 
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
@@ -292,7 +299,32 @@ class TinglysningGml:
                     lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.dlg.lineEdit.text()))
                     lyr.changeAttributeValue(feat.id(),  org_idx, str(self.dlg.lineEdit_2.text()))
                     lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(self.dlg.lineEdit_3.text()))
+                    lyr.changeAttributeValue(feat.id(), overkat_idx, str(overkat))
+                    lyr.changeAttributeValue(feat.id(), underkat_idx, str(underkat))
                 lyr.commitChanges()
+
+    def set_categories(self):
+        self.categories = {
+            'Andet': ['Andet', 'Ikke kategoriseret', u'Vandløb'],
+            'Anvendelse': ['Andet', 'Anvendelsesforhold', 'Fredning', u'Højdebegrænsning', 'Sanering'],
+            'Bebyggelse': ['Andet', 'Brandmur', 'Byggelinie', 'Bebyggelsesforhold', u'Vilkår'],
+            'Brugs- eller ejerforhold': ['Andet', 'Jagtret'],
+            'Ejendomsforhold': ['Andet', 'Byggeretligt skel', 'Grundejerforening', 'Hegn','Udstykning'],
+            'Forsyning': ['Andet', 'Naturgas', 'Tilslutningspligt', 'Vand', 'Varme'],
+            u'Køb og salg': ['Andet', 'Forkøbsret', 'Salgsforhold', u'Tilbagekøbsret/pligt, hjemfaldspligt'],
+            'Ledninger': ['Andet', u'Forsyning/afløb', 'Telefon'],
+            u'Tekniske anlæg': ['Andet', 'El, vand, varme eller gas', 'Master', u'Transformeranlæg', u'Vandværk'],
+            u'Færdsel': ['Andet', 'Adgangsforhold', 'Parkering', 'Vej', 'Vejret'],
+            u'Bygning på lejet grund': ['Andet']
+        }
+
+        self.dlg.comboBox_3.addItems(self.categories.keys())
+
+        self.set_under_kat(self.dlg.comboBox_3.currentText())
+
+    def set_under_kat(self, text):
+        self.dlg.comboBox_4.clear()
+        self.dlg.comboBox_4.addItems(self.categories[text])
 
     def run(self):
         """Run method that performs all the real work"""
