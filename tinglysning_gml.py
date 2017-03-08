@@ -187,11 +187,13 @@ class TinglysningGml:
         self.set_producer_info()
         self.set_layer_list()
 
+        # Pushbuttons
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
 
-        self.dlg.pushButton.clicked.connect(self.set_values)
+        # Test nye methods knap!
+        # self.dlg.pushButton_5.clicked.connect(self.set_values)
 
 
     def unload(self):
@@ -249,7 +251,24 @@ class TinglysningGml:
                 lyr.updateFields()
 
     def set_values(self):
+
+        # Finder lag, de rskal være som baggrung
         self.cur_lyr = self.dlg.comboBox_2.currentText()
+
+        # Identificer data, der skal fyldes i attributtabel
+        metode = self.methods_dict[self.dlg.comboBox.currentText()]
+        dato = self.dlg.dateEdit.text()
+
+        if self.dlg.radioButton.isChecked():
+            noejagtighed = 1
+        elif self.dlg.radioButton_2.isChecked():
+            noejagtighed = 2
+
+        if self.dlg.radioButton_3.isChecked():
+            oprindelse = 'TL'
+        elif self.dlg.radioButton_4.isChecked():
+            oprindelse = 'KF'
+
 
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
@@ -264,11 +283,16 @@ class TinglysningGml:
                 overkat_idx = lyr.fieldNameIndex('overkat')
                 underkat_idx = lyr.fieldNameIndex('underkat')
 
+                lyr.startEditing()
                 for feat in lyr.getFeatures():
-                    pass
-
-
-
+                    lyr.changeAttributeValue(feat.id(), dato_idx, str(dato))
+                    lyr.changeAttributeValue(feat.id(), noejagt_idx, str(noejagtighed))
+                    lyr.changeAttributeValue(feat.id(), metode_idx, str(metode))
+                    lyr.changeAttributeValue(feat.id(), oprindelse_idx, str(oprindelse))
+                    lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.dlg.lineEdit.text()))
+                    lyr.changeAttributeValue(feat.id(),  org_idx, str(self.dlg.lineEdit_2.text()))
+                    lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(self.dlg.lineEdit_3.text()))
+                lyr.commitChanges()
 
     def run(self):
         """Run method that performs all the real work"""
