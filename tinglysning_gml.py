@@ -274,6 +274,7 @@ class TinglysningGml:
         elif self.dlg.radioButton_4.isChecked():
             oprindelse = 'KF'
 
+        # TODO Finde ud af encoding problemet! Skal det muligvis bare gemmes til QGIS3?
         overkat = unicodedata.normalize('NFKD', self.dlg.comboBox_3.currentText()).encode('ascii', 'ignore')
         underkat = unicodedata.normalize('NFKD', self.dlg.comboBox_4.currentText()).encode('ascii', 'ignore')
 
