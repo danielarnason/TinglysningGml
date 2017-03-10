@@ -22,7 +22,7 @@
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant
 from PyQt4.QtGui import QAction, QIcon, QFileDialog
-from qgis.core import QgsMapLayerRegistry, QgsField
+from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -193,12 +193,13 @@ class TinglysningGml:
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
+        self.dlg.pushButton.clicked.connect(self.save_gml)
 
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
 
         # Test nye methods knap!
-        self.dlg.pushButton_5.clicked.connect(self.set_values)
+        # self.dlg.pushButton_5.clicked.connect(self.save_gml)
 
 
     def unload(self):
@@ -326,6 +327,19 @@ class TinglysningGml:
     def set_under_kat(self, text):
         self.dlg.comboBox_4.clear()
         self.dlg.comboBox_4.addItems(self.categories[text])
+
+    def save_gml(self):
+        self.set_values()
+        output_f = self.dlg.lineEdit_4.text()
+        output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
+        self.cur_lyr = str(self.dlg.comboBox_2.currentText())
+
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.cur_lyr:
+                QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
+
+
+
 
     def run(self):
         """Run method that performs all the real work"""
