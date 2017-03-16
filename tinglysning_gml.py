@@ -280,7 +280,7 @@ class TinglysningGml:
         underkat = unicodedata.normalize('NFKD', self.dlg.comboBox_4.currentText()).encode('ascii', 'ignore')
 
         if len(self.dlg.lineEdit_3.text()) > 0:
-            esdh_nr = str(self.dlg.lineEdit_2.text())
+            esdh_nr = str(self.dlg.lineEdit_3.text())
         else:
             esdh_nr = ''
 
@@ -318,7 +318,7 @@ class TinglysningGml:
             'Brugs- eller ejerforhold': ['Andet', 'Jagtret'],
             'Ejendomsforhold': ['Andet', 'Byggeretligt skel', 'Grundejerforening', 'Hegn','Udstykning'],
             'Forsyning': ['Andet', 'Naturgas', 'Tilslutningspligt', 'Vand', 'Varme'],
-            u'Køb og salg': ['Andet', 'Forkøbsret', 'Salgsforhold', u'Tilbagekøbsret/pligt, hjemfaldspligt'],
+            u'Køb og salg': ['Andet', u'Forkøbsret', 'Salgsforhold', u'Tilbagekøbsret/pligt, hjemfaldspligt'],
             'Ledninger': ['Andet', u'Forsyning/afløb', 'Telefon'],
             u'Tekniske anlæg': ['Andet', 'El, vand, varme eller gas', 'Master', u'Transformeranlæg', u'Vandværk'],
             u'Færdsel': ['Andet', 'Adgangsforhold', 'Parkering', 'Vej', 'Vejret'],
@@ -343,6 +343,8 @@ class TinglysningGml:
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
                 QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
+
+        self.iface.addVectorLayer(output_f, os.path.basename(output_f), 'ogr')
 
 
 
