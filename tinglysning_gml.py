@@ -279,6 +279,11 @@ class TinglysningGml:
         overkat = unicodedata.normalize('NFKD', self.dlg.comboBox_3.currentText()).encode('ascii', 'ignore')
         underkat = unicodedata.normalize('NFKD', self.dlg.comboBox_4.currentText()).encode('ascii', 'ignore')
 
+        if len(self.dlg.lineEdit_3.text()) > 0:
+            esdh_nr = str(self.dlg.lineEdit_2.text())
+        else:
+            esdh_nr = ''
+
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
 
@@ -300,7 +305,7 @@ class TinglysningGml:
                     lyr.changeAttributeValue(feat.id(), oprindelse_idx, str(oprindelse))
                     lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.dlg.lineEdit.text()))
                     lyr.changeAttributeValue(feat.id(),  org_idx, str(self.dlg.lineEdit_2.text()))
-                    lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(self.dlg.lineEdit_3.text()))
+                    lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(esdh_nr))
                     lyr.changeAttributeValue(feat.id(), overkat_idx, str(overkat))
                     lyr.changeAttributeValue(feat.id(), underkat_idx, str(underkat))
                 lyr.commitChanges()
