@@ -329,6 +329,7 @@ class TinglysningGml:
         self.dlg.comboBox_4.addItems(self.categories[text])
 
     def save_gml(self):
+        self.gml_add_cols()
         self.set_values()
         output_f = self.dlg.lineEdit_4.text()
         output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
