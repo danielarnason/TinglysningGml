@@ -78,8 +78,6 @@ class TinglysningGml:
         # Producer info
         # TODO Flyt de her informationer i MySettings, så man kan ændre de her værdier
 
-        self.cvrnr = '29188386'
-        self.organization = 'Egedal kommune'
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -207,8 +205,8 @@ class TinglysningGml:
         self.dlg.lineEdit_4.setText(self.output_filename)
 
     def set_producer_info(self):
-        self.dlg.lineEdit.setText(self.cvrnr)
-        self.dlg.lineEdit_2.setText(self.organization)
+        self.dlg.lineEdit.setText(self.settings.value('cvrnr'))
+        self.dlg.lineEdit_2.setText(self.settings.value('organization'))
 
     def set_layer_list(self):
         self.lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
@@ -266,7 +264,8 @@ class TinglysningGml:
         else:
             esdh_nr = ''
 
-
+        self.settings.set_value('cvrnr', self.dlg.lineEdit.text())
+        self.settings.set_value('organization', self.dlg.lineEdit_2.text())
 
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
@@ -287,8 +286,8 @@ class TinglysningGml:
                     lyr.changeAttributeValue(feat.id(), noejagt_idx, str(noejagtighed))
                     lyr.changeAttributeValue(feat.id(), metode_idx, str(metode))
                     lyr.changeAttributeValue(feat.id(), oprindelse_idx, str(oprindelse))
-                    lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.dlg.lineEdit.text()))
-                    lyr.changeAttributeValue(feat.id(),  org_idx, str(self.dlg.lineEdit_2.text()))
+                    lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.settings.value('cvrnr')))
+                    lyr.changeAttributeValue(feat.id(),  org_idx, str(self.settings.value('organization')))
                     lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(esdh_nr))
                     lyr.changeAttributeValue(feat.id(), overkat_idx, str(overkat))
                     lyr.changeAttributeValue(feat.id(), underkat_idx, str(underkat))
@@ -355,6 +354,7 @@ class TinglysningGml:
 
         # Test nye methods knap!
         # self.dlg.pushButton_5.clicked.connect(self.save_gml)
+
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
