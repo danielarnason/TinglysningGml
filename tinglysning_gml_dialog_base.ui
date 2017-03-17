@@ -6,85 +6,66 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>331</width>
-    <height>482</height>
+    <width>345</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_10">
+   <item row="0" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout_8">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Stedf. dato</string>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QDateEdit" name="dateEdit">
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Stedf. dato</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QDateEdit" name="dateEdit">
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="1">
-    <layout class="QGridLayout" name="gridLayout_3">
-     <item row="1" column="0">
-      <widget class="QComboBox" name="comboBox"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Metode</string>
-       </property>
-      </widget>
+     <item row="0" column="1">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Metode</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="2" column="0">
-      <widget class="QRadioButton" name="radioButton">
-       <property name="text">
-        <string>&lt; 20 cm</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QRadioButton" name="radioButton_2">
-       <property name="text">
-        <string>&lt; 3 m</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">buttonGroup</string>
-       </attribute>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
        <property name="font">
@@ -99,11 +80,34 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QRadioButton" name="radioButton">
+       <property name="text">
+        <string>&lt; 20 cm</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="text">
+        <string>&lt; 3 m</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">buttonGroup</string>
+       </attribute>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="1" column="1">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
+    <layout class="QGridLayout" name="gridLayout_9">
+     <item row="0" column="0">
       <widget class="QLabel" name="label_3">
        <property name="font">
         <font>
@@ -117,7 +121,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="0">
       <widget class="QRadioButton" name="radioButton_3">
        <property name="text">
         <string>Tinglysning</string>
@@ -127,7 +131,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="2" column="0">
       <widget class="QRadioButton" name="radioButton_4">
        <property name="text">
         <string>Kortforbedring</string>
@@ -152,25 +156,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_12">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Overkategori</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_3"/>
-       </item>
-      </layout>
-     </item>
      <item row="1" column="1">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -187,6 +172,25 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBox_4"/>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_12">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Overkategori</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_3"/>
        </item>
       </layout>
      </item>
@@ -210,15 +214,10 @@
      </item>
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>CVR nr.</string>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="placeholderText">
+          <string>Indtast CVR nr</string>
          </property>
         </widget>
        </item>
@@ -234,10 +233,15 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLineEdit" name="lineEdit">
-         <property name="placeholderText">
-          <string>Indtast CVR nr</string>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>CVR nr.</string>
          </property>
         </widget>
        </item>
@@ -279,17 +283,29 @@
    </item>
    <item row="4" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout_6">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_8">
+     <item row="3" column="1">
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Refresh liste</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_10">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Gem GML fil</string>
+        <string>Vælg lag til konvertering</string>
        </property>
       </widget>
      </item>
@@ -304,39 +320,20 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Vælg lag til konvertering</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
       <widget class="QComboBox" name="comboBox_2"/>
      </item>
-     <item row="2" column="1">
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>Refresh liste</string>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="text">
-        <string>TEST NYE METODER!</string>
+        <string>Gem GML fil</string>
        </property>
       </widget>
      </item>
