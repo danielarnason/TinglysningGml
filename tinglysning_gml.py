@@ -327,7 +327,8 @@ class TinglysningGml:
             if lyr.name() == self.cur_lyr:
                 QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
 
-        self.iface.addVectorLayer(output_f, os.path.basename(output_f), 'ogr')
+        self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
+        self.annuller_luk()
 
 
 
