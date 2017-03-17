@@ -201,7 +201,7 @@ class TinglysningGml:
         self.dlg.comboBox.setCurrentIndex(self.methods_dict.keys().index('Matrikel'))
 
     def select_output_file(self):
-        self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', '', '*.gml')
+        self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', self.settings.value('output_path'), '*.gml')
         self.dlg.lineEdit_4.setText(self.output_filename)
 
     def set_producer_info(self):
@@ -328,10 +328,8 @@ class TinglysningGml:
                 QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
 
         self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
+        self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
         self.annuller_luk()
-
-
-
 
     def run(self):
         """Run method that performs all the real work"""

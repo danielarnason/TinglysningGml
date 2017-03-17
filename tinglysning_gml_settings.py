@@ -7,3 +7,4 @@ class MySettings(SettingManager):
 
         self.add_setting(String('cvrnr', Scope.Global, ''))
         self.add_setting(String('organization', Scope.Global, ''))
+        self.add_setting(String('output_path', Scope.Global, ''))
