@@ -336,8 +336,6 @@ class TinglysningGml:
         else:
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
 
-        self.annuller_luk()
-
     def generer_composition(self):
         template_path = 'W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\tinglysning_skabelon.qpt'
         template_file = file(template_path)
