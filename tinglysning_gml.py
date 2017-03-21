@@ -399,7 +399,7 @@ class TinglysningGml:
         if self.dlg.checkBox_3.isChecked() == True:
             self.generer_img('png')
 
-        if self.dlg.checkBox.isChecked() == False & self.dlg.checkBox_2.isChecked() == False & self.dlg.checkBox_3.isChecked() == False:
+        if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
             self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
 
     def run(self):
