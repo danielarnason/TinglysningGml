@@ -329,8 +329,13 @@ class TinglysningGml:
             if lyr.name() == self.cur_lyr:
                 QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
 
-        self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
-        self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
+        if self.dlg.checkBox_4.isChecked() == True:
+            self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
+            self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
+            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
+        else:
+            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
+
         self.annuller_luk()
 
     def generer_composition(self):
