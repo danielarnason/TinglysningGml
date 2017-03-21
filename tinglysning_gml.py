@@ -20,9 +20,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant
-from PyQt4.QtGui import QAction, QIcon, QFileDialog
-from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF
+from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter
+from PyQt4.QtXml import QDomDocument
+from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -331,6 +332,41 @@ class TinglysningGml:
         self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
         self.annuller_luk()
 
+    def generer_composition(self):
+        template_path = 'W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\tinglysning_skabelon.qpt'
+        template_file = file(template_path)
+        template_content = template_file.read()
+        template_file.close()
+
+        document = QDomDocument()
+        document.setContent(template_content)
+
+        canvas = self.iface.mapCanvas()
+        composition = QgsComposition(canvas.mapSettings())
+        composition.loadFromTemplate(document, {})
+
+        map_item = composition.getComposerItemById('map')
+        map_item.setMapCanvas(canvas)
+        map_item.zoomToExtent(canvas.extent())
+
+        return composition
+
+    def generer_pdf(self):
+        composition = self.generer_composition()
+        printer = QPrinter()
+        printer.setOutputFormat(QPrinter.PdfFormat)
+        printer.setOutputFileName('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\plugin_test.pdf')
+        printer.setPaperSize(QSizeF(composition.paperWidth(), composition.paperHeight()), QPrinter.Millimeter)
+        printer.setFullPage(True)
+        printer.setColorMode(QPrinter.Color)
+        printer.setResolution(composition.printResolution())
+
+        pdfPainter = QPainter(printer)
+        paperRectMM = printer.pageRect(QPrinter.Millimeter)
+        paperRectPixel = printer.pageRect(QPrinter.DevicePixel)
+        composition.render(pdfPainter, paperRectPixel, paperRectMM)
+        pdfPainter.end()
+
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
@@ -348,6 +384,7 @@ class TinglysningGml:
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
         self.dlg.pushButton.clicked.connect(self.save_gml)
+        self.dlg.pushButton_5.clicked.connect(self.generer_pdf)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
 
