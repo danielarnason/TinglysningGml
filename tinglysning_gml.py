@@ -24,6 +24,7 @@ from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVa
 from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage
 from PyQt4.QtXml import QDomDocument
 from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition
+from qgis.gui import QgsMessageBar
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -396,7 +397,7 @@ class TinglysningGml:
             self.generer_img('png')
 
         if self.dlg.checkBox.isChecked() == False & self.dlg.checkBox_2.isChecked() == False & self.dlg.checkBox_3.isChecked() == False:
-            print u'Du skal vælge mindst ét format'
+            self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
 
     def run(self):
         """Run method that performs all the real work"""
