@@ -20,8 +20,8 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF
-from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF, QSize
+from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage
 from PyQt4.QtXml import QDomDocument
 from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition
 # Initialize Qt resources from file resources.py
@@ -367,6 +367,37 @@ class TinglysningGml:
         composition.render(pdfPainter, paperRectPixel, paperRectMM)
         pdfPainter.end()
 
+    def generer_img(self, format):
+        composition = self.generer_composition()
+        dpmm = 300 / 25.4
+
+        width = int(dpmm * composition.paperWidth())
+        height = int(dpmm * composition.paperHeight())
+
+        image = QImage(QSize(width, height), QImage.Format_ARGB32)
+        image.setDotsPerMeterX(dpmm * 1000)
+        image.setDotsPerMeterY(dpmm * 1000)
+        image.fill(0)
+
+        imagePainter = QPainter(image)
+        composition.renderPage(imagePainter, 0)
+        imagePainter.end()
+
+        image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
+
+    def generer_kortbilag(self):
+        if self.dlg.checkBox.isChecked() == True:
+            self.generer_pdf()
+
+        if self.dlg.checkBox_2.isChecked() == True:
+            self.generer_img('jpg')
+
+        if self.dlg.checkBox_3.isChecked() == True:
+            self.generer_img('png')
+
+        if self.dlg.checkBox.isChecked() == False & self.dlg.checkBox_2.isChecked() == False & self.dlg.checkBox_3.isChecked() == False:
+            print u'Du skal vælge mindst ét format'
+
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
@@ -384,7 +415,7 @@ class TinglysningGml:
         self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
         self.dlg.pushButton.clicked.connect(self.save_gml)
-        self.dlg.pushButton_5.clicked.connect(self.generer_pdf)
+        self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
 
