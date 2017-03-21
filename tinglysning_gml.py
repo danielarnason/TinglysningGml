@@ -23,7 +23,7 @@
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF, QSize
 from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage
 from PyQt4.QtXml import QDomDocument
-from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition
+from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition, QgsComposerLabel
 from qgis.gui import QgsMessageBar
 # Initialize Qt resources from file resources.py
 import resources
@@ -349,9 +349,19 @@ class TinglysningGml:
         composition = QgsComposition(canvas.mapSettings())
         composition.loadFromTemplate(document, {})
 
+        # set map item
         map_item = composition.getComposerItemById('map')
         map_item.setMapCanvas(canvas)
         map_item.zoomToExtent(canvas.extent())
+
+        # set text
+        composerLabel = QgsComposerLabel(composition)
+        composerLabel.setText(self.dlg.lineEdit_5.text())
+        composerLabel.adjustSizeToText()
+        composerLabel.setItemPosition(132.694, 179.247)
+        composerLabel.setFrameEnabled(True)
+        # composerLabel.
+        composition.addItem(composerLabel)
 
         return composition
 
