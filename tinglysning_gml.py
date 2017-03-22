@@ -29,7 +29,7 @@ from qgis.gui import QgsMessageBar
 import resources
 # Import the code for the dialog
 from tinglysning_gml_dialog import TinglysningGmlDialog
-import os.path
+import os
 import datetime
 import unicodedata
 # MySettings (qgissettingmanager)
@@ -324,6 +324,7 @@ class TinglysningGml:
         output_f = self.dlg.lineEdit_4.text()
         output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
         self.cur_lyr = str(self.dlg.comboBox_2.currentText())
+        self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
 
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.cur_lyr:
@@ -331,7 +332,6 @@ class TinglysningGml:
 
         if self.dlg.checkBox_4.isChecked() == True:
             self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
-            self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
         else:
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
@@ -370,9 +370,12 @@ class TinglysningGml:
         return composition
 
     def generer_pdf(self, composition):
+
+        output_name = 'rids_' + self.dlg.lineEdit_6.text() + '_' + self.dlg.lineEdit_7.text() + '.pdf'
+
         printer = QPrinter()
         printer.setOutputFormat(QPrinter.PdfFormat)
-        printer.setOutputFileName('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\plugin_test.pdf')
+        printer.setOutputFileName(self.settings.value('output_path') + os.sep + output_name)
         printer.setPaperSize(QSizeF(composition.paperWidth(), composition.paperHeight()), QPrinter.Millimeter)
         printer.setFullPage(True)
         printer.setColorMode(QPrinter.Color)
@@ -385,6 +388,9 @@ class TinglysningGml:
         pdfPainter.end()
 
     def generer_img(self,composition, format):
+
+        output_name = 'rids_' + self.dlg.lineEdit_6.text() + '_' + self.dlg.lineEdit_7.text() + '.{}'.format(format)
+
         dpmm = 300 / 25.4
 
         width = int(dpmm * composition.paperWidth())
@@ -399,7 +405,8 @@ class TinglysningGml:
         composition.renderPage(imagePainter, 0)
         imagePainter.end()
 
-        image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
+        image.save(self.settings.value('output_path') + os.sep + output_name, '{}'.format(format))
+        # image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
         composition = self.generer_composition()
