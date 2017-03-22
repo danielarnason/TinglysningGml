@@ -334,8 +334,9 @@ class TinglysningGml:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
                 if lyr.name() == self.cur_lyr:
                     QgsMapLayerRegistry.instance().removeMapLayers([lyr.id()])
-            self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
-            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
+
+            self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0], 'ogr')
+            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt og åbnet i QGIS', level=QgsMessageBar.INFO, duration=5)
         else:
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
 
