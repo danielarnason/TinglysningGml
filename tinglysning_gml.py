@@ -356,11 +356,15 @@ class TinglysningGml:
 
         # set text
         composerLabel = QgsComposerLabel(composition)
-        composerLabel.setText(self.dlg.lineEdit_5.text())
+        composerLabel.setText('Vedr.:\t' + self.dlg.lineEdit_5.text() + '\n' + \
+                              'Matrikler: ' + self.dlg.lineEdit_6.text() + '\n' + \
+                              'Ejerlav: ' + self.dlg.lineEdit_7.text() + '\n' + \
+                              'Journalnr: ' + self.dlg.lineEdit_3.text() + '\n' + \
+                              'Dato: ' + self.dlg.dateEdit.text())
+        composerLabel.setMarginY(-16)
         composerLabel.adjustSizeToText()
-        composerLabel.setItemPosition(132.694, 179.247)
-        composerLabel.setFrameEnabled(True)
-        # composerLabel.
+        composerLabel.setItemPosition(140, 196)
+        # composerLabel.setFrameEnabled(True)
         composition.addItem(composerLabel)
 
         return composition
