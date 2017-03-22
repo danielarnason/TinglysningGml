@@ -323,7 +323,7 @@ class TinglysningGml:
         self.set_values()
         output_f = self.dlg.lineEdit_4.text()
         output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
-        self.cur_lyr = str(self.dlg.comboBox_2.currentText())
+        self.cur_lyr = self.dlg.comboBox_2.currentText()
         self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
 
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
