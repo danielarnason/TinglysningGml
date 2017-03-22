@@ -369,8 +369,7 @@ class TinglysningGml:
 
         return composition
 
-    def generer_pdf(self):
-        composition = self.generer_composition()
+    def generer_pdf(self, composition):
         printer = QPrinter()
         printer.setOutputFormat(QPrinter.PdfFormat)
         printer.setOutputFileName('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\plugin_test.pdf')
@@ -385,8 +384,7 @@ class TinglysningGml:
         composition.render(pdfPainter, paperRectPixel, paperRectMM)
         pdfPainter.end()
 
-    def generer_img(self, format):
-        composition = self.generer_composition()
+    def generer_img(self,composition, format):
         dpmm = 300 / 25.4
 
         width = int(dpmm * composition.paperWidth())
@@ -404,14 +402,15 @@ class TinglysningGml:
         image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
+        composition = self.generer_composition()
         if self.dlg.checkBox.isChecked() == True:
-            self.generer_pdf()
+            self.generer_pdf(composition)
 
         if self.dlg.checkBox_2.isChecked() == True:
-            self.generer_img('jpg')
+            self.generer_img(composition, 'jpg')
 
         if self.dlg.checkBox_3.isChecked() == True:
-            self.generer_img('png')
+            self.generer_img(composition, 'png')
 
         if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
             self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
