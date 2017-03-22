@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF, QSize
-from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage
+from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage, QColor
 from PyQt4.QtXml import QDomDocument
 from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition, QgsComposerLabel
 from qgis.gui import QgsMessageBar
@@ -341,6 +341,14 @@ class TinglysningGml:
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
 
     def generer_composition(self):
+
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.storageType() == 'GML':
+                symbol = lyr.rendererV2().symbols()[0]
+                symbol.setColor(QColor.fromRgb(255, 0, 0))
+                self.iface.mapCanvas().refresh()
+                self.iface.legendInterface().refreshLayerSymbology(lyr)
+
         template_path = 'W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\tinglysning_skabelon.qpt'
         template_file = file(template_path)
         template_content = template_file.read()
