@@ -331,6 +331,9 @@ class TinglysningGml:
                 QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
 
         if self.dlg.checkBox_4.isChecked() == True:
+            for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+                if lyr.name() == self.cur_lyr:
+                    QgsMapLayerRegistry.instance().removeMapLayers([lyr.id()])
             self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0] + ' (gml fil)', 'ogr')
             self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
         else:
