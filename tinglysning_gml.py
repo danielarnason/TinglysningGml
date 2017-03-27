@@ -349,7 +349,7 @@ class TinglysningGml:
                 self.iface.mapCanvas().refresh()
                 self.iface.legendInterface().refreshLayerSymbology(lyr)
 
-        template_path = 'W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\tinglysning_skabelon.qpt'
+        template_path = self.settings.value('template_path')
         template_file = file(template_path)
         template_content = template_file.read()
         template_file.close()
