@@ -421,18 +421,21 @@ class TinglysningGml:
         # image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
-        composition = self.generer_composition()
-        if self.dlg.checkBox.isChecked() == True:
-            self.generer_pdf(composition)
+        if self.settings.value('template_path') == '':
+            self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge et QGIS skabelon', level=QgsMessageBar.CRITICAL, duration=10)
+        else:
+            composition = self.generer_composition()
+            if self.dlg.checkBox.isChecked() == True:
+                self.generer_pdf(composition)
 
-        if self.dlg.checkBox_2.isChecked() == True:
-            self.generer_img(composition, 'jpg')
+            if self.dlg.checkBox_2.isChecked() == True:
+                self.generer_img(composition, 'jpg')
 
-        if self.dlg.checkBox_3.isChecked() == True:
-            self.generer_img(composition, 'png')
+            if self.dlg.checkBox_3.isChecked() == True:
+                self.generer_img(composition, 'png')
 
-        if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
-            self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
+            if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
+                self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
 
     def run(self):
         """Run method that performs all the real work"""
