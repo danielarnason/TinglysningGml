@@ -479,7 +479,7 @@ class TinglysningGml:
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
 
-        self.dlg.lineEdit_8.editingFinished.connect(self.set_scale)
+        self.dlg.lineEdit_8.textEdited.connect(self.set_scale)
 
         # Test nye methods knap!
         # self.dlg.pushButton_5.clicked.connect(self.save_gml)
