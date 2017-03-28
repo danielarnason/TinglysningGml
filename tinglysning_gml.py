@@ -308,7 +308,12 @@ class TinglysningGml:
                     lyr.changeAttributeValue(feat.id(), noejagt_idx, str(noejagtighed))
                     lyr.changeAttributeValue(feat.id(), metode_idx, str(metode))
                     lyr.changeAttributeValue(feat.id(), oprindelse_idx, str(oprindelse))
-                    lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.settings.value('cvrnr')))
+
+                    if self.settings.value('cvrnr') == '':
+                        lyr.changeAttributeValue(feat.id(), cvr_idx, 0)
+                    else:
+                        lyr.changeAttributeValue(feat.id(), cvr_idx, int(self.settings.value('cvrnr')))
+                    
                     lyr.changeAttributeValue(feat.id(),  org_idx, str(self.settings.value('organization')))
                     lyr.changeAttributeValue(feat.id(), esdh_nr_idx, str(esdh_nr))
                     lyr.changeAttributeValue(feat.id(), overkat_idx, str(overkat))
