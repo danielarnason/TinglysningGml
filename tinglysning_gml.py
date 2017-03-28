@@ -446,6 +446,16 @@ class TinglysningGml:
     def set_template_text(self):
         self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
 
+    def set_scale(self):
+        if ':' in self.dlg.lineEdit_8.text():
+            scale = self.dlg.lineEdit_8.text().split(':')[1]
+            self.dlg.lineEdit_8.clear()
+            self.dlg.lineEdit_8.setText('1:' + scale)
+        else:
+            scale = self.dlg.lineEdit_8.text()
+            self.dlg.lineEdit_8.setText('1:' + scale)
+
+
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
@@ -468,6 +478,8 @@ class TinglysningGml:
         self.dlg.pushButton_6.clicked.connect(self.select_template)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
+
+        self.dlg.lineEdit_8.editingFinished.connect(self.set_scale)
 
         # Test nye methods knap!
         # self.dlg.pushButton_5.clicked.connect(self.save_gml)
