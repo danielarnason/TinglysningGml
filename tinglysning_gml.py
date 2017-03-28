@@ -183,6 +183,26 @@ class TinglysningGml:
             callback=self.run,
             parent=self.iface.mainWindow())
 
+        # Fyld plugin med værdier
+        self.set_time()
+        self.set_methods()
+        self.set_producer_info()
+        self.set_layer_list()
+        self.set_categories()
+        self.set_template_text()
+
+        # Pushbuttons
+        self.dlg.pushButton_3.clicked.connect(self.select_output_file)
+        self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
+        self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
+        self.dlg.pushButton.clicked.connect(self.save_gml)
+        self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
+        self.dlg.pushButton_6.clicked.connect(self.select_template)
+
+        self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
+
+        self.dlg.lineEdit_8.textEdited.connect(self.set_scale)
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -470,26 +490,6 @@ class TinglysningGml:
         """Run method that performs all the real work"""
         # show the dialog
         self.dlg.show()
-
-        # Fyld plugin med værdier
-        self.set_time()
-        self.set_methods()
-        self.set_producer_info()
-        self.set_layer_list()
-        self.set_categories()
-        self.set_template_text()
-
-        # Pushbuttons
-        self.dlg.pushButton_3.clicked.connect(self.select_output_file)
-        self.dlg.pushButton_4.clicked.connect(self.refresh_layer_list)
-        self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
-        self.dlg.pushButton.clicked.connect(self.save_gml)
-        self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
-        self.dlg.pushButton_6.clicked.connect(self.select_template)
-
-        self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
-
-        self.dlg.lineEdit_8.textEdited.connect(self.set_scale)
 
         # Test nye methods knap!
         # self.dlg.pushButton_5.clicked.connect(self.save_gml)
