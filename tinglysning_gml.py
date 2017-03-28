@@ -430,7 +430,6 @@ class TinglysningGml:
         # image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
-        self.settings.set_value('template_path', self.settings.value('template_path'))
         if self.settings.value('template_path') == '':
             self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge en QGIS skabelon', level=QgsMessageBar.CRITICAL, duration=5)
         else:
@@ -450,6 +449,7 @@ class TinglysningGml:
     def select_template(self):
         self.template_filename = QFileDialog.getOpenFileName(self.dlg, u'Vælg print skabelon', self.settings.value('template_path'), '*.qpt')
         self.dlg.lineEdit_9.setText(os.path.basename(self.template_filename))
+        self.settings.set_value('template_path', self.template_filename)
 
     def set_template_text(self):
         self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
