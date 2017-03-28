@@ -345,12 +345,15 @@ class TinglysningGml:
 
         gml_lyr = None
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-            if lyr.storageType() == 'GML':
-                gml_lyr = lyr
-                symbol = lyr.rendererV2().symbols()[0]
-                symbol.setColor(QColor.fromRgb(255, 0, 0))
-                self.iface.mapCanvas().refresh()
-                self.iface.legendInterface().refreshLayerSymbology(lyr)
+            try:
+                if lyr.storageType() == 'GML':
+                    gml_lyr = lyr
+                    symbol = lyr.rendererV2().symbols()[0]
+                    symbol.setColor(QColor.fromRgb(255, 0, 0))
+                    self.iface.mapCanvas().refresh()
+                    self.iface.legendInterface().refreshLayerSymbology(lyr)
+            except AttributeError:
+                pass
 
         template_path = self.settings.value('template_path')
         template_file = file(template_path)
