@@ -343,8 +343,10 @@ class TinglysningGml:
 
     def generer_composition(self):
 
+        gml_lyr = None
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.storageType() == 'GML':
+                gml_lyr = lyr
                 symbol = lyr.rendererV2().symbols()[0]
                 symbol.setColor(QColor.fromRgb(255, 0, 0))
                 self.iface.mapCanvas().refresh()
@@ -359,13 +361,17 @@ class TinglysningGml:
         document.setContent(template_content)
 
         canvas = self.iface.mapCanvas()
+
         composition = QgsComposition(canvas.mapSettings())
         composition.loadFromTemplate(document, {})
 
         # set map item
         map_item = composition.getComposerItemById('map')
         map_item.setMapCanvas(canvas)
-        map_item.zoomToExtent(canvas.extent())
+        map_item.zoomToExtent(gml_lyr.extent())
+        if len(self.dlg.lineEdit_8.text()) > 0:
+            canvas.zoomScale(int(self.scale))
+            map_item.setNewScale(canvas.scale())
 
         # set text
         composerLabel = QgsComposerLabel(composition)
@@ -422,7 +428,7 @@ class TinglysningGml:
         # image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
-        self.settings.set_value('template_path', self.template_filename)
+        self.settings.set_value('template_path', self.settings.value('template_path'))
         if self.settings.value('template_path') == '':
             self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge en QGIS skabelon', level=QgsMessageBar.CRITICAL, duration=5)
         else:
@@ -448,13 +454,12 @@ class TinglysningGml:
 
     def set_scale(self):
         if ':' in self.dlg.lineEdit_8.text():
-            scale = self.dlg.lineEdit_8.text().split(':')[1]
+            self.scale = self.dlg.lineEdit_8.text().split(':')[1]
             self.dlg.lineEdit_8.clear()
-            self.dlg.lineEdit_8.setText('1:' + scale)
+            self.dlg.lineEdit_8.setText('1:' + self.scale)
         else:
-            scale = self.dlg.lineEdit_8.text()
-            self.dlg.lineEdit_8.setText('1:' + scale)
-
+            self.scale = self.dlg.lineEdit_8.text()
+            self.dlg.lineEdit_8.setText('1:' + self.scale)
 
     def run(self):
         """Run method that performs all the real work"""
