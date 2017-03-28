@@ -368,10 +368,12 @@ class TinglysningGml:
         # set map item
         map_item = composition.getComposerItemById('map')
         map_item.setMapCanvas(canvas)
-        map_item.zoomToExtent(gml_lyr.extent())
         if len(self.dlg.lineEdit_8.text()) > 0:
+            map_item.zoomToExtent(gml_lyr.extent())
             canvas.zoomScale(int(self.scale))
             map_item.setNewScale(canvas.scale())
+        else:
+            map_item.zoomToExtent(canvas.extent())
 
         # set text
         composerLabel = QgsComposerLabel(composition)
