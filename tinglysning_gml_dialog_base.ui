@@ -420,13 +420,21 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="lineEdit_8">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -457,6 +465,13 @@
              <height>20</height>
             </rect>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
           </widget>
           <widget class="QLineEdit" name="lineEdit_5">
            <property name="geometry">
@@ -466,6 +481,13 @@
              <width>131</width>
              <height>20</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
            </property>
           </widget>
           <widget class="QLabel" name="label_14">
@@ -537,6 +559,13 @@
              <height>20</height>
             </rect>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
           </widget>
          </widget>
         </item>
@@ -580,6 +609,16 @@
              <width>131</width>
              <height>20</height>
             </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>Vælg print skabelon</string>
            </property>
           </widget>
           <widget class="QCheckBox" name="checkBox_3">
