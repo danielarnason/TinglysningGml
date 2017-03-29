@@ -494,20 +494,24 @@ class TinglysningGml:
 
     def set_matrikler(self):
         cur_lyr = None
-        matrikler = None
+        matrikler = self.iface.activeLayer()
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.dlg.comboBox_2.currentText():
                 cur_lyr = lyr
-            elif lyr.name() == 'Matrikler':
-                matrikler = lyr
 
         processing.runalg('qgis:selectbylocation', matrikler, cur_lyr, u'intersects', 0, 0)
-        selected_features = matrikler.selectedFeatures()
-        for f in selected_features:
-            matrnr = f.attribute('matrnr')
-            ejerlav = f.attribute('elavsnavn')
 
-            print matrnr, ejerlav
+        try:
+            if len(matrikler.selectedFeatures()) > 0:
+                selected_features = matrikler.selectedFeatures()
+                matrikel_lst = [feat.attribute('matrnr') for feat in matrikler.selectedFeatures()]
+
+                self.dlg.lineEdit_7.setText(matrikler.selectedFeatures()[0].attribute('elavsnavn'))
+                self.dlg.lineEdit_6.setText(', '.join(i for i in matrikel_lst))
+
+                matrikler.removeSelection()
+        except KeyError:
+            self.iface.messageBar().pushMessage('FJEL', u'Husl at vælge matrikellaget i lagvinduet', level=QgsMessageBar.INFO, duration=10)
 
     def run(self):
         """Run method that performs all the real work"""
