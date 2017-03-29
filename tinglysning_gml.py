@@ -32,6 +32,7 @@ from tinglysning_gml_dialog import TinglysningGmlDialog
 import os
 import datetime
 import unicodedata
+import processing
 # MySettings (qgissettingmanager)
 from tinglysning_gml_settings import MySettings
 
@@ -491,13 +492,30 @@ class TinglysningGml:
             self.scale = self.dlg.lineEdit_8.text()
             self.dlg.lineEdit_8.setText('1:' + self.scale)
 
+    def set_matrikler(self):
+        cur_lyr = None
+        matrikler = None
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.dlg.comboBox_2.currentText():
+                cur_lyr = lyr
+            elif lyr.name() == 'Matrikler':
+                matrikler = lyr
+
+        processing.runalg('qgis:selectbylocation', matrikler, cur_lyr, u'intersects', 0, 0)
+        selected_features = matrikler.selectedFeatures()
+        for f in selected_features:
+            matrnr = f.attribute('matrnr')
+            ejerlav = f.attribute('elavsnavn')
+
+            print matrnr, ejerlav
+
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
         self.dlg.show()
 
         # Test nye methods knap!
-        # self.dlg.pushButton_5.clicked.connect(self.save_gml)
+        self.dlg.pushButton_7.clicked.connect(self.set_matrikler)
 
         # Run the dialog event loop
         result = self.dlg.exec_()
