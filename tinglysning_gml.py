@@ -370,23 +370,32 @@ class TinglysningGml:
                 self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
         except KeyError:
             self.iface.messageBar().pushMessage('FEJL', u'Husk at vælge matrikellaget i lagvinduet', level=QgsMessageBar.CRITICAL, duration=10)
+            # self.iface.activeLayer().removeSelection()
         except IndexError:
             self.iface.messageBar().pushMessage('FEJL', u'GML fil ikke gemt! Husk at markere matrikellaget i lagvinduet', level=QgsMessageBar.CRITICAL, duration=10)
 
     def generer_composition(self):
 
-        gml_lyr = None
-        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-            try:
-                if lyr.storageType() == 'GML':
-                    gml_lyr = lyr
+        comp_lyr = None
+        if self.dlg.checkBox_4.isChecked() == False:
+            for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+                if lyr.name() == self.dlg.lineEdit_8.text():
+                    comp_lyr = lyr
                     symbol = lyr.rendererV2().symbols()[0]
                     symbol.setColor(QColor.fromRgb(255, 0, 0))
                     self.iface.mapCanvas().refresh()
                     self.iface.legendInterface().refreshLayerSymbology(lyr)
-            except AttributeError:
-                pass
-
+                else:
+                    pass
+        else:
+            for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+                if lyr.storageType() == 'GML':
+                    comp_lyr = lyr
+                    symbol = lyr.rendererV2().symbols()[0]
+                    symbol.setColor(QColor.fromRgb(255, 0, 0))
+                    self.iface.mapCanvas().refresh()
+                    self.iface.legendInterface().refreshLayerSymbology(lyr)
+                    
         template_path = self.settings.value('template_path')
         template_file = file(template_path)
         template_content = template_file.read()
@@ -404,7 +413,7 @@ class TinglysningGml:
         map_item = composition.getComposerItemById('map')
         map_item.setMapCanvas(canvas)
         if len(self.dlg.lineEdit_8.text()) > 0:
-            map_item.zoomToExtent(gml_lyr.extent())
+            map_item.zoomToExtent(comp_lyr.extent())
             canvas.zoomScale(int(self.scale))
             map_item.setNewScale(canvas.scale())
         else:
