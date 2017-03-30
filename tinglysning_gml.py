@@ -346,26 +346,32 @@ class TinglysningGml:
         self.dlg.comboBox_4.addItems(self.categories[text])
 
     def save_gml(self):
-        self.gml_add_cols()
-        self.set_values()
-        output_f = self.dlg.lineEdit_4.text()
-        output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
-        self.cur_lyr = self.dlg.comboBox_2.currentText()
-        self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
+        try:
+            self.set_matrikler()
+            self.gml_add_cols()
+            self.set_values()
+            output_f = self.dlg.lineEdit_4.text()
+            output_crs = QgsCoordinateReferenceSystem(25832, QgsCoordinateReferenceSystem.EpsgCrsId)
+            self.cur_lyr = self.dlg.comboBox_2.currentText()
+            self.settings.set_value('output_path', os.path.dirname(self.dlg.lineEdit_4.text()))
 
-        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-            if lyr.name() == self.cur_lyr:
-                QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
-
-        if self.dlg.checkBox_4.isChecked() == True:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
                 if lyr.name() == self.cur_lyr:
-                    QgsMapLayerRegistry.instance().removeMapLayers([lyr.id()])
+                    QgsVectorFileWriter.writeAsVectorFormat(lyr, output_f, 'utf-8', output_crs, 'GML')
 
-            self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0], 'ogr')
-            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt og åbnet i QGIS', level=QgsMessageBar.INFO, duration=5)
-        else:
-            self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
+            if self.dlg.checkBox_4.isChecked() == True:
+                for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+                    if lyr.name() == self.cur_lyr:
+                        QgsMapLayerRegistry.instance().removeMapLayers([lyr.id()])
+
+                self.iface.addVectorLayer(output_f, os.path.basename(output_f).split('.')[0], 'ogr')
+                self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt og åbnet i QGIS', level=QgsMessageBar.INFO, duration=5)
+            else:
+                self.iface.messageBar().pushMessage('INFO', u'GML filen er gemt', level=QgsMessageBar.INFO, duration=5)
+        except KeyError:
+            self.iface.messageBar().pushMessage('FEJL', u'Husk at vælge matrikellaget i lagvinduet', level=QgsMessageBar.CRITICAL, duration=10)
+        except IndexError:
+            self.iface.messageBar().pushMessage('FEJL', u'GML fil ikke gemt! Husk at markere matrikellaget i lagvinduet', level=QgsMessageBar.CRITICAL, duration=10)
 
     def generer_composition(self):
 
@@ -421,7 +427,7 @@ class TinglysningGml:
 
     def generer_pdf(self, composition):
 
-        output_name = 'rids_' + self.dlg.lineEdit_6.text() + '_' + self.dlg.lineEdit_7.text() + '.pdf'
+        output_name = 'rids_' + self.dlg.lineEdit_6.text().replace(', ', '_') + '_' + self.dlg.lineEdit_7.text().replace(', ', '_') + '.pdf'
 
         printer = QPrinter()
         printer.setOutputFormat(QPrinter.PdfFormat)
@@ -501,25 +507,18 @@ class TinglysningGml:
 
         processing.runalg('qgis:selectbylocation', matrikler, cur_lyr, u'intersects', 0, 0)
 
-        try:
-            if len(matrikler.selectedFeatures()) > 0:
-                selected_features = matrikler.selectedFeatures()
-                matrikel_lst = [feat.attribute('matrnr') for feat in matrikler.selectedFeatures()]
+        # if len(matrikler.selectedFeatures()) > 0:
+        matrikel_lst = [feat.attribute('matrnr') for feat in matrikler.selectedFeatures()]
 
-                self.dlg.lineEdit_7.setText(matrikler.selectedFeatures()[0].attribute('elavsnavn'))
-                self.dlg.lineEdit_6.setText(', '.join(i for i in matrikel_lst))
+        self.dlg.lineEdit_7.setText(matrikler.selectedFeatures()[0].attribute('elavsnavn'))
+        self.dlg.lineEdit_6.setText(', '.join(i for i in matrikel_lst))
 
-                matrikler.removeSelection()
-        except KeyError:
-            self.iface.messageBar().pushMessage('FJEL', u'Husl at vælge matrikellaget i lagvinduet', level=QgsMessageBar.INFO, duration=10)
+        matrikler.removeSelection()
 
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
         self.dlg.show()
-
-        # Test nye methods knap!
-        self.dlg.pushButton_7.clicked.connect(self.set_matrikler)
 
         # Run the dialog event loop
         result = self.dlg.exec_()
