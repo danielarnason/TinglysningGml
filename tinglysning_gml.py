@@ -234,10 +234,12 @@ class TinglysningGml:
     def set_layer_list(self):
         self.lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
         self.dlg.comboBox_2.addItems(self.lyrs)
+        self.dlg.comboBox_5.addItems(self.lyrs)
         self.cur_lyr = self.dlg.comboBox_2.currentText()
 
     def refresh_layer_list(self):
         self.dlg.comboBox_2.clear()
+        self.dlg.comboBox_5.clear()
         self.set_layer_list()
 
     def annuller_luk(self):
@@ -509,10 +511,14 @@ class TinglysningGml:
 
     def set_matrikler(self):
         cur_lyr = None
-        matrikler = self.iface.activeLayer()
+        matrikler = None
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.dlg.comboBox_2.currentText():
                 cur_lyr = lyr
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.dlg.comboBox_5.currentText():
+                matrikler = lyr
+
 
         processing.runalg('qgis:selectbylocation', matrikler, cur_lyr, u'intersects', 0, 0)
 
