@@ -1,0 +1,148 @@
+<Composer title="Composer 1" visible="1">
+ <Composition resizeToContentsMarginLeft="0" snapping="0" showPages="1" guidesVisible="1" resizeToContentsMarginTop="0" alignmentSnap="1" printResolution="300" paperWidth="297" gridVisible="0" snapGridOffsetX="0" smartGuides="1" snapGridOffsetY="0" resizeToContentsMarginRight="0" snapTolerancePixels="5" printAsRaster="0" generateWorldFile="0" paperHeight="210" numPages="1" snapGridResolution="10" resizeToContentsMarginBottom="0">
+  <symbol alpha="1" clip_to_extent="1" type="fill" name="">
+   <layer pass="0" class="SimpleFill" locked="0">
+    <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+    <prop k="color" v="255,255,255,255"/>
+    <prop k="joinstyle" v="miter"/>
+    <prop k="offset" v="0,0"/>
+    <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+    <prop k="offset_unit" v="MM"/>
+    <prop k="outline_color" v="0,0,0,255"/>
+    <prop k="outline_style" v="no"/>
+    <prop k="outline_width" v="0.26"/>
+    <prop k="outline_width_unit" v="MM"/>
+    <prop k="style" v="solid"/>
+   </layer>
+  </symbol>
+  <ComposerPicture resizeMode="3" svgBorderWidth="0.2" pictureRotation="0" pictureWidth="6.23995" svgFillColor="255,255,255,255" svgBorderColor="0,0,0,255" file="C:/OSGEO4~1/apps/qgis/svg/arrows/NorthArrow_04.svg" pictureHeight="9.92254" mapId="0" anchorPoint="4">
+   <ComposerItem pagey="4.7652" page="1" id="nordpil" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="284.905" y="4.7652" visibility="1" zValue="9" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="6.23995" outlineWidth="0.3" excludeFromExports="0" uuid="{8192faaa-9e17-499a-83cb-03ba3a521844}" height="9.92254" itemRotation="0" frame="false" pagex="284.905">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <dataDefinedSource expr="" field="" active="false" useExpr="true"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerPicture>
+  <ComposerPicture resizeMode="0" svgBorderWidth="0.2" pictureRotation="0" pictureWidth="49.9015" svgFillColor="255,255,255,255" svgBorderColor="0,0,0,255" file="Q:/CPK/Fælles/Egedal logoer og byvåben/Samlet byvaaben og logo.jpg" pictureHeight="27.942" mapId="-1" anchorPoint="4">
+   <ComposerItem pagey="179.097" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="237.569" y="179.097" visibility="1" zValue="9" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="56.963" outlineWidth="0.3" excludeFromExports="0" uuid="{117c8c70-1811-4907-850f-83fff0c669e7}" height="27.942" itemRotation="0" frame="false" pagex="237.569">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <dataDefinedSource expr="" field="" active="false" useExpr="true"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerPicture>
+  <ComposerLabel valign="32" marginX="1" marginY="1" labelText="[%'Ridset er udarbejdet af ' ||  @user_full_name %]" htmlState="0" halign="1">
+   <LabelFont description="MS Shell Dlg 2,10,-1,5,50,0,0,0,0,0" style=""/>
+   <FontColor red="0" blue="0" green="0"/>
+   <ComposerItem pagey="173.018" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="1.7389" y="173.018" visibility="1" zValue="7" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="120.851" outlineWidth="0.3" excludeFromExports="0" uuid="{ac921512-3ed6-4ff0-81bd-c5bd3ad0fd70}" height="6.07904" itemRotation="0" frame="false" pagex="1.7389">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerLabel>
+  <ComposerLegend symbolWidth="7" title="Signaturforklaring" boxSpace="2" rasterBorderWidth="0" splitLayer="1" equalColumnWidth="1" map="0" titleAlignment="1" rasterBorder="1" symbolHeight="4" wmsLegendHeight="25" wrapChar="" fontColor="#000000" columnSpace="4" wmsLegendWidth="50" columnCount="2" rasterBorderColor="0,0,0,255">
+   <styles>
+    <style marginBottom="2" name="title">
+     <styleFont description="MS Shell Dlg 2,10,-1,5,75,0,0,0,0,0" style=""/>
+    </style>
+    <style marginTop="2" name="group">
+     <styleFont description="MS Shell Dlg 2,14,-1,5,50,0,0,0,0,0" style=""/>
+    </style>
+    <style marginTop="2" name="subgroup">
+     <styleFont description="MS Shell Dlg 2,12,-1,5,50,0,0,0,0,0" style=""/>
+    </style>
+    <style marginTop="2" name="symbol">
+     <styleFont description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
+    </style>
+    <style marginTop="2" marginLeft="2" name="symbolLabel">
+     <styleFont description="MS Shell Dlg 2,8,-1,5,50,0,0,0,0,0" style=""/>
+    </style>
+   </styles>
+   <ComposerItem pagey="179.097" page="1" id="legende" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="1.7389" y="179.097" visibility="1" zValue="5" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="60" outlineWidth="0.3" excludeFromExports="0" uuid="{f85688d8-3612-4b4a-a016-7e281ae1157f}" height="21.6" itemRotation="0" frame="false" pagex="1.7389">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerLegend>
+  <ComposerScaleBar lineCapStyle="square" style="Numeric" numMapUnitsPerScaleBarUnit="1000" segmentSizeMode="0" alignment="2" numSegments="4" segmentMillimeters="27.9351" lineJoinStyle="miter" minBarWidth="50" numUnitsPerSegment="2500" units="1" labelBarSpace="3" outlineWidth="0.3" numSegmentsLeft="2" maxBarWidth="150" height="3" boxContentSpace="1" mapId="0" unitLabel="km">
+   <scaleBarFont description="MS Shell Dlg 2,10,-1,5,50,0,0,0,0,0" style=""/>
+   <fillColor alpha="255" red="0" blue="0" green="0"/>
+   <fillColor2 alpha="255" red="255" blue="255" green="255"/>
+   <strokeColor alpha="255" red="0" blue="0" green="0"/>
+   <textColor alpha="255" red="0" blue="0" green="0"/>
+   <ComposerItem pagey="166.939" page="1" id="maalestok" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="266.325" y="166.939" visibility="1" zValue="5" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="28.2068" outlineWidth="0.3" excludeFromExports="0" uuid="{b02d2412-f3f8-495d-b138-1dffdeb70296}" height="5.95809" itemRotation="0" frame="false" pagex="266.325">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerScaleBar>
+  <ComposerLabel valign="32" marginX="1" marginY="1" labelText="Egedal Kommune erklærer, at der er overenstemmelse mellem rids og GML fil" htmlState="0" halign="1">
+   <LabelFont description="MS Shell Dlg 2,10,-1,5,50,0,0,0,0,0" style=""/>
+   <FontColor red="0" blue="0" green="0"/>
+   <ComposerItem pagey="166.939" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="1.7389" y="166.939" visibility="1" zValue="2" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="133.739" outlineWidth="0.3" excludeFromExports="0" uuid="{24e6373d-8344-4eab-9cb6-e77b95791719}" height="6.07904" itemRotation="0" frame="false" pagex="1.7389">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerLabel>
+  <ComposerMap mapRotation="0" keepLayerSet="false" id="0" previewMode="Cache" drawCanvasItems="true">
+   <Extent ymin="6178624.91159826517105103" xmin="686973.17304232530295849" ymax="6193391.27716191858053207" xmax="713158.23485666466876864"/>
+   <LayerSet/>
+   <Grid/>
+   <ComposerMapGrid rightAnnotationDirection="0" gridFramePenColor="0,0,0,255" show="0" bottomAnnotationPosition="1" annotationPrecision="3" showAnnotation="0" topFrameDivisions="0" uuid="{d5b261b6-a952-42f4-a2e0-a8e44836b8ee}" leftAnnotationDirection="0" topAnnotationPosition="1" rightAnnotationDisplay="0" offsetX="0" offsetY="0" rightFrameDivisions="0" gridStyle="0" annotationFontColor="0,0,0,255" intervalX="0" gridFrameSideFlags="15" intervalY="0" bottomAnnotationDirection="0" leftAnnotationDisplay="0" leftFrameDivisions="0" frameFillColor1="255,255,255,255" annotationExpression="" frameFillColor2="0,0,0,255" crossLength="3" gridFramePenThickness="0.5" bottomAnnotationDisplay="0" unit="0" topAnnotationDisplay="0" leftAnnotationPosition="1" blendMode="0" gridFrameStyle="0" rightAnnotationPosition="1" gridFrameWidth="2" name="Grid 1" annotationFormat="0" bottomFrameDivisions="0" topAnnotationDirection="0" frameAnnotationDistance="1">
+    <lineStyle>
+     <symbol alpha="1" clip_to_extent="1" type="line" name="">
+      <layer pass="0" class="SimpleLine" locked="0">
+       <prop k="capstyle" v="square"/>
+       <prop k="customdash" v="5;2"/>
+       <prop k="customdash_map_unit_scale" v="0,0,0,0,0,0"/>
+       <prop k="customdash_unit" v="MM"/>
+       <prop k="draw_inside_polygon" v="0"/>
+       <prop k="joinstyle" v="bevel"/>
+       <prop k="line_color" v="0,0,0,255"/>
+       <prop k="line_style" v="solid"/>
+       <prop k="line_width" v="0"/>
+       <prop k="line_width_unit" v="MM"/>
+       <prop k="offset" v="0"/>
+       <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+       <prop k="offset_unit" v="MM"/>
+       <prop k="use_custom_dash" v="0"/>
+       <prop k="width_map_unit_scale" v="0,0,0,0,0,0"/>
+      </layer>
+     </symbol>
+    </lineStyle>
+    <markerStyle>
+     <symbol alpha="1" clip_to_extent="1" type="marker" name="">
+      <layer pass="0" class="SimpleMarker" locked="0">
+       <prop k="angle" v="0"/>
+       <prop k="color" v="0,0,0,255"/>
+       <prop k="horizontal_anchor_point" v="1"/>
+       <prop k="name" v="circle"/>
+       <prop k="offset" v="0,0"/>
+       <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+       <prop k="offset_unit" v="MM"/>
+       <prop k="outline_color" v="0,0,0,255"/>
+       <prop k="outline_style" v="solid"/>
+       <prop k="outline_width" v="0"/>
+       <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+       <prop k="outline_width_unit" v="MM"/>
+       <prop k="scale_method" v="diameter"/>
+       <prop k="size" v="2"/>
+       <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
+       <prop k="size_unit" v="MM"/>
+       <prop k="vertical_anchor_point" v="1"/>
+      </layer>
+     </symbol>
+    </markerStyle>
+    <annotationFontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
+   </ComposerMapGrid>
+   <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
+   <ComposerItem pagey="1.8389" page="1" id="map" lastValidViewScaleFactor="4.11249" positionMode="0" positionLock="false" x="1.8389" y="1.8389" visibility="1" zValue="1" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="292.593" outlineWidth="0.2" excludeFromExports="0" uuid="{fc08aa4d-bea4-429d-9cc8-86c91994a19c}" height="165" itemRotation="0" frame="true" pagex="1.8389">
+    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+    <customproperties/>
+   </ComposerItem>
+  </ComposerMap>
+  <customproperties/>
+ </Composition>
+</Composer>
