@@ -340,8 +340,10 @@ class TinglysningGml:
         }
 
         self.dlg.comboBox_3.addItems(self.categories.keys())
+        self.dlg.comboBox_3.setCurrentIndex(3)
 
         self.set_under_kat(self.dlg.comboBox_3.currentText())
+        self.dlg.comboBox_4.setCurrentIndex(3)
 
     def set_under_kat(self, text):
         self.dlg.comboBox_4.clear()
