@@ -503,13 +503,7 @@ class TinglysningGml:
         self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
 
     def set_scale(self):
-        if ':' in self.dlg.lineEdit_8.text():
-            self.scale = self.dlg.lineEdit_8.text().split(':')[1]
-            self.dlg.lineEdit_8.clear()
-            self.dlg.lineEdit_8.setText('1:' + self.scale)
-        else:
-            self.scale = self.dlg.lineEdit_8.text()
-            self.dlg.lineEdit_8.setText('1:' + self.scale)
+        self.scale = self.dlg.lineEdit_8.text()
 
     def set_matrikler(self):
         cur_lyr = None

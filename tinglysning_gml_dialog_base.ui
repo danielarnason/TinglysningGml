@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>364</width>
-    <height>548</height>
+    <width>416</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -628,7 +628,7 @@
                </font>
               </property>
               <property name="text">
-               <string>Målestoksforhold</string>
+               <string>Målestoksforhold - 1:</string>
               </property>
              </widget>
             </item>
