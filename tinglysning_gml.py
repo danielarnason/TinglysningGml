@@ -198,7 +198,6 @@ class TinglysningGml:
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
         self.dlg.pushButton.clicked.connect(self.save_gml)
         self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
-        self.dlg.pushButton_6.clicked.connect(self.select_template)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
 
@@ -400,7 +399,8 @@ class TinglysningGml:
                     self.iface.mapCanvas().refresh()
                     self.iface.legendInterface().refreshLayerSymbology(lyr)
                     
-        template_path = self.settings.value('template_path')
+        home = os.path.expanduser('~')
+        template_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'print_skabelon.qpt')
         template_file = file(template_path)
         template_content = template_file.read()
         template_file.close()
@@ -493,11 +493,6 @@ class TinglysningGml:
 
             if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
                 self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
-
-    def select_template(self):
-        self.template_filename = QFileDialog.getOpenFileName(self.dlg, u'Vælg print skabelon', self.settings.value('template_path'), '*.qpt')
-        self.dlg.lineEdit_9.setText(os.path.basename(self.template_filename))
-        self.settings.set_value('template_path', self.template_filename)
 
     def set_template_text(self):
         self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
