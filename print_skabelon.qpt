@@ -15,14 +15,6 @@
     <prop k="style" v="solid"/>
    </layer>
   </symbol>
-  <ComposerPicture resizeMode="0" svgBorderWidth="0.2" pictureRotation="0" pictureWidth="49.9015" svgFillColor="255,255,255,255" svgBorderColor="0,0,0,255" northMode="0" file="Q:/CPK/Fælles/Egedal logoer og byvåben/Samlet byvaaben og logo.jpg" northOffset="0" pictureHeight="27.942" mapId="-1" anchorPoint="4">
-   <ComposerItem pagey="179.097" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="237.569" y="179.097" visibility="1" zValue="9" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="56.963" outlineWidth="0.3" excludeFromExports="0" uuid="{98a024ae-6cac-420e-9de8-bcc1d3e841b1}" height="27.942" itemRotation="0" frame="false" pagex="237.569">
-    <FrameColor alpha="255" red="0" blue="0" green="0"/>
-    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
-    <dataDefinedSource expr="" field="" active="false" useExpr="true"/>
-    <customproperties/>
-   </ComposerItem>
-  </ComposerPicture>
   <ComposerLabel valign="32" marginX="1" marginY="1" labelText="[%'Ridset er udarbejdet af ' ||  @user_full_name %]" htmlState="0" halign="1">
    <LabelFont description="MS Shell Dlg 2,10,-1,5,50,0,0,0,0,0" style=""/>
    <FontColor red="0" blue="0" green="0"/>

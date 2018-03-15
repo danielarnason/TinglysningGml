@@ -444,6 +444,14 @@ class TinglysningGml:
         northarrow.setItemPosition(285,5)
         composition.addItem(northarrow)
 
+        # Set Egedal logo
+        logo = QgsComposerPicture(composition)
+        logo_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'egedal_logo.jpg')
+        logo.setPictureFile(logo_path)
+        logo.setSceneRect(QRectF(0, 0, 57, 28))
+        logo.setItemPosition(238, 179)
+        composition.addItem(logo)
+
         return composition
 
     def generer_pdf(self, composition):
