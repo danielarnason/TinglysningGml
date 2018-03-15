@@ -190,7 +190,6 @@ class TinglysningGml:
         self.set_producer_info()
         self.set_layer_list()
         self.set_categories()
-        self.set_template_text()
 
         # Pushbuttons
         self.dlg.pushButton_3.clicked.connect(self.select_output_file)
@@ -321,7 +320,6 @@ class TinglysningGml:
                     lyr.changeAttributeValue(feat.id(), overkat_idx, str(overkat))
                     lyr.changeAttributeValue(feat.id(), underkat_idx, str(underkat))
                 lyr.commitChanges()
-        self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
 
     def set_categories(self):
         self.categories = {
@@ -506,9 +504,6 @@ class TinglysningGml:
 
         if self.dlg.checkBox.isChecked() == False and self.dlg.checkBox_2.isChecked() == False and self.dlg.checkBox_3.isChecked() == False:
             self.iface.messageBar().pushMessage('FEJL', u'Du skal vælge mindst ét format til kortbilag', level=QgsMessageBar.CRITICAL, duration=5)
-
-    def set_template_text(self):
-        self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('template_path')))
 
     def set_scale(self):
         self.scale = self.dlg.lineEdit_8.text()
