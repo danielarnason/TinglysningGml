@@ -528,34 +528,6 @@
              </property>
              <layout class="QGridLayout" name="gridLayout_15">
               <item row="0" column="0">
-               <widget class="QPushButton" name="pushButton_6">
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                  <weight>50</weight>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Vælg QGIS skabelon</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLineEdit" name="lineEdit_9">
-                <property name="font">
-                 <font>
-                  <pointsize>8</pointsize>
-                  <weight>50</weight>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="placeholderText">
-                 <string>Vælg print skabelon</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
                <widget class="QCheckBox" name="checkBox">
                 <property name="font">
                  <font>
@@ -572,7 +544,7 @@
                 </property>
                </widget>
               </item>
-              <item row="3" column="0">
+              <item row="1" column="0">
                <widget class="QCheckBox" name="checkBox_2">
                 <property name="font">
                  <font>
@@ -586,7 +558,7 @@
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
+              <item row="2" column="0">
                <widget class="QCheckBox" name="checkBox_3">
                 <property name="font">
                  <font>
