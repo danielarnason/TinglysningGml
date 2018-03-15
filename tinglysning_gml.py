@@ -20,10 +20,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF, QSize
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QVariant, QSizeF, QSize, QRectF
 from PyQt4.QtGui import QAction, QIcon, QFileDialog, QPrinter, QPainter, QImage, QColor
 from PyQt4.QtXml import QDomDocument
-from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition, QgsComposerLabel
+from qgis.core import QgsMapLayerRegistry, QgsField, QgsVectorFileWriter, QgsCoordinateReferenceSystem, QgsComposition, QgsComposerLabel, QgsComposerPicture
 from qgis.gui import QgsMessageBar
 # Initialize Qt resources from file resources.py
 import resources
@@ -435,6 +435,14 @@ class TinglysningGml:
         composerLabel.setItemPosition(140, 196)
         # composerLabel.setFrameEnabled(True)
         composition.addItem(composerLabel)
+
+        # Set northarrow
+        northarrow = QgsComposerPicture(composition)
+        northarrow_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'northarrow.svg')
+        northarrow.setPictureFile(northarrow_path)
+        northarrow.setSceneRect(QRectF( 0, 0, 6, 10))
+        northarrow.setItemPosition(285,5)
+        composition.addItem(northarrow)
 
         return composition
 
