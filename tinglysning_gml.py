@@ -378,12 +378,13 @@ class TinglysningGml:
     def generer_composition(self):
 
         comp_lyr = None
+        home = os.path.expanduser('~')
+
         if self.dlg.checkBox_4.isChecked() == False:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
                 if lyr.name() == self.dlg.lineEdit_8.text():
                     comp_lyr = lyr
-                    symbol = lyr.rendererV2().symbols()[0]
-                    symbol.setColor(QColor.fromRgb(255, 0, 0))
+                    processing.runalg('qgis:setstyleforvectorlayer', comp_lyr.source(), os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'hegn_style.qml'))
                     self.iface.mapCanvas().refresh()
                     self.iface.legendInterface().refreshLayerSymbology(lyr)
                 else:
@@ -392,12 +393,10 @@ class TinglysningGml:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
                 if lyr.storageType() == 'GML':
                     comp_lyr = lyr
-                    symbol = lyr.rendererV2().symbols()[0]
-                    symbol.setColor(QColor.fromRgb(255, 0, 0))
+                    processing.runalg('qgis:setstyleforvectorlayer', comp_lyr.source(), os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'hegn_style.qml'))
                     self.iface.mapCanvas().refresh()
                     self.iface.legendInterface().refreshLayerSymbology(lyr)
                     
-        home = os.path.expanduser('~')
         template_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'print_skabelon.qpt')
         template_file = file(template_path)
         template_content = template_file.read()
