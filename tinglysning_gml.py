@@ -382,7 +382,7 @@ class TinglysningGml:
 
         if self.dlg.checkBox_4.isChecked() == False:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-                if lyr.name() == self.dlg.lineEdit_8.text():
+                if lyr.name() == self.dlg.comboBox_2.currentText():
                     comp_lyr = lyr
                     processing.runalg('qgis:setstyleforvectorlayer', comp_lyr.source(), os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'hegn_style.qml'))
                     self.iface.mapCanvas().refresh()
