@@ -531,10 +531,19 @@ class TinglysningGml:
 
         matrikler.removeSelection()
 
+    def set_matrikel_columns(self):
+        attributes = None
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == self.dlg.comboBox_5.currentText():
+                attributes = [lyr.attributeDisplayName(i) for i in lyr.attributeList()]
+        self.dlg.comboBox_6.addItems(attributes)
+        self.dlg.comboBox_7.addItems(attributes)
+
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
         self.dlg.show()
+        self.set_matrikel_columns()
 
         # Run the dialog event loop
         result = self.dlg.exec_()
