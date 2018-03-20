@@ -391,12 +391,15 @@ class TinglysningGml:
                     pass
         else:
             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-                if lyr.storageType() == 'GML':
-                    comp_lyr = lyr
-                    processing.runalg('qgis:setstyleforvectorlayer', comp_lyr.source(), os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'hegn_style.qml'))
-                    self.iface.mapCanvas().refresh()
-                    self.iface.legendInterface().refreshLayerSymbology(lyr)
-                    
+                try:
+                    if lyr.storageType() == 'GML':
+                        comp_lyr = lyr
+                        processing.runalg('qgis:setstyleforvectorlayer', comp_lyr.source(), os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'hegn_style.qml'))
+                        self.iface.mapCanvas().refresh()
+                        self.iface.legendInterface().refreshLayerSymbology(lyr)
+                except AttributeError:
+                    pass
+
         template_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'print_skabelon.qpt')
         template_file = file(template_path)
         template_content = template_file.read()
