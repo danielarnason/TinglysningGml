@@ -199,6 +199,7 @@ class TinglysningGml:
         self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
+        self.dlg.comboBox_5.currentIndexChanged.connect(self.set_matrikel_columns)
 
         self.dlg.lineEdit_8.textEdited.connect(self.set_scale)
 
@@ -532,6 +533,8 @@ class TinglysningGml:
         matrikler.removeSelection()
 
     def set_matrikel_columns(self):
+        self.dlg.comboBox_6.clear()
+        self.dlg.comboBox_7.clear()
         attributes = None
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.dlg.comboBox_5.currentText():
