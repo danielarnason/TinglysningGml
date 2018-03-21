@@ -472,6 +472,7 @@ class TinglysningGml:
         paperRectPixel = printer.pageRect(QPrinter.DevicePixel)
         composition.render(pdfPainter, paperRectPixel, paperRectMM)
         pdfPainter.end()
+        self.iface.messageBar().pushMessage('INFO', u'PDF fil gemt!', level=QgsMessageBar.INFO, duration=5)
 
     def generer_img(self,composition, format):
 
@@ -492,7 +493,6 @@ class TinglysningGml:
         imagePainter.end()
 
         image.save(self.settings.value('output_path') + os.sep + output_name, '{}'.format(format))
-        # image.save('W:\\qgis\\Produktion\\GIS\\Daniel\\Tinglysning_qgis\\test_img.{}'.format(format), '{}'.format(format))
 
     def generer_kortbilag(self):
         composition = self.generer_composition()
