@@ -521,13 +521,12 @@ class TinglysningGml:
             if lyr.name() == self.dlg.comboBox_5.currentText():
                 matrikler = lyr
 
-
         processing.runalg('qgis:selectbylocation', matrikler, cur_lyr, u'intersects', 0, 0)
 
         # if len(matrikler.selectedFeatures()) > 0:
-        matrikel_lst = [feat.attribute('matrnr') for feat in matrikler.selectedFeatures()]
+        matrikel_lst = [feat.attribute(self.dlg.comboBox_6.currentText()) for feat in matrikler.selectedFeatures()]
 
-        self.dlg.lineEdit_7.setText(matrikler.selectedFeatures()[0].attribute('elavsnavn'))
+        self.dlg.lineEdit_7.setText(matrikler.selectedFeatures()[0].attribute(self.dlg.comboBox_7.currentText()))
         self.dlg.lineEdit_6.setText(', '.join(i for i in matrikel_lst))
 
         matrikler.removeSelection()
@@ -539,8 +538,11 @@ class TinglysningGml:
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
             if lyr.name() == self.dlg.comboBox_5.currentText():
                 attributes = [lyr.attributeDisplayName(i) for i in lyr.attributeList()]
-        self.dlg.comboBox_6.addItems(attributes)
-        self.dlg.comboBox_7.addItems(attributes)
+        if attributes == None:
+            pass
+        else:
+            self.dlg.comboBox_6.addItems(attributes)
+            self.dlg.comboBox_7.addItems(attributes)
 
     def run(self):
         """Run method that performs all the real work"""
