@@ -16,7 +16,7 @@ email=daniel.arnason@egekom.dk
 
 about=Dette plugin kan bruges til at generere de nødvendige gml filer og kortbilag i forbindelse med tinglysning af servitutter.
 
-tracker=https://github.com/danielarnason/tinglysning/issues
+tracker=https://github.com/danielarnason/TinglysningGml/issues
 repository=https://github.com/danielarnason/TinglysningGml.git
 # End of mandatory metadata
 
