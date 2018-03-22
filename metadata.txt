@@ -8,16 +8,16 @@
 
 [general]
 name=Tinglysning
-qgisMinimumVersion=2.0
+qgisMinimumVersion=2.14
 description=Dan GML filer til tinglysning
-version=0.1
+version=0.9
 author=Daníel Örn Árnason
 email=daniel.arnason@egekom.dk
 
 about=Dette plugin kan bruges til at generere de nødvendige gml filer og kortbilag i forbindelse med tinglysning af servitutter.
 
 tracker=https://github.com/danielarnason/tinglysning/issues
-repository=https://github.com/danielarnason/TinglysningGml
+repository=https://github.com/danielarnason/TinglysningGml.git
 # End of mandatory metadata
 
 # Recommended items:
