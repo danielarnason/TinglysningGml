@@ -197,6 +197,7 @@ class TinglysningGml:
         self.dlg.pushButton_2.clicked.connect(self.annuller_luk)
         self.dlg.pushButton.clicked.connect(self.save_gml)
         self.dlg.pushButton_5.clicked.connect(self.generer_kortbilag)
+        self.dlg.pushButton_6.clicked.connect(self.select_logo_path)
 
         self.dlg.comboBox_3.activated[str].connect(self.set_under_kat)
         self.dlg.comboBox_5.currentIndexChanged.connect(self.set_matrikel_columns)
@@ -225,6 +226,11 @@ class TinglysningGml:
     def select_output_file(self):
         self.output_filename = QFileDialog.getSaveFileName(self.dlg, u'Vælg placering', self.settings.value('output_path'), '*.gml')
         self.dlg.lineEdit_4.setText(self.output_filename)
+
+    def select_logo_path(self):
+        self.logo_path = QFileDialog.getOpenFileName(self.dlg)
+        self.settings.set_value('logo_path', self.logo_path)
+        self.dlg.lineEdit_9.setText(os.path.basename(self.logo_path))
 
     def set_producer_info(self):
         self.dlg.lineEdit.setText(self.settings.value('cvrnr'))
