@@ -444,6 +444,13 @@ class TinglysningGml:
         # composerLabel.setFrameEnabled(True)
         composition.addItem(composerLabel)
 
+        composerLabel2 = QgsComposerLabel(composition)
+        composerLabel2.setText('{} erklærer, at der er overensstemmelse mellem rids og GML fil'.format(self.settings.value('organization')))
+        composerLabel2.adjustSizeToText()
+        composerLabel2.setItemPosition(1.739, 166.939)
+        composition.addItem(composerLabel2)
+
+
         # Set northarrow
         northarrow = QgsComposerPicture(composition)
         northarrow_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'northarrow.svg')
