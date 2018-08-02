@@ -10,7 +10,7 @@
 name=Tinglysning
 qgisMinimumVersion=2.14
 description=Dan GML filer til tinglysning
-version=0.9
+version=0.95
 author=Daníel Örn Árnason
 email=daniel.arnason@egekom.dk
 
