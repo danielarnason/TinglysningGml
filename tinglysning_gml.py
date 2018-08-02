@@ -187,7 +187,7 @@ class TinglysningGml:
         # Fyld plugin med v√¶rdier
         self.set_time()
         self.set_methods()
-        self.set_producer_info()
+        self.set_info()
         self.set_layer_list()
         self.set_categories()
 
@@ -228,13 +228,14 @@ class TinglysningGml:
         self.dlg.lineEdit_4.setText(self.output_filename)
 
     def select_logo_path(self):
-        self.logo_path = QFileDialog.getOpenFileName(self.dlg)
+        self.logo_path = QFileDialog.getOpenFileName(self.dlg, 'VÊlg fil med logo', self.settings.value('logo_path'))
         self.settings.set_value('logo_path', self.logo_path)
         self.dlg.lineEdit_9.setText(os.path.basename(self.logo_path))
 
-    def set_producer_info(self):
+    def set_info(self):
         self.dlg.lineEdit.setText(self.settings.value('cvrnr'))
         self.dlg.lineEdit_2.setText(self.settings.value('organization'))
+        self.dlg.lineEdit_9.setText(os.path.basename(self.settings.value('logo_path')))
 
     def set_layer_list(self):
         self.lyrs = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
@@ -453,7 +454,7 @@ class TinglysningGml:
 
         # Set Egedal logo
         logo = QgsComposerPicture(composition)
-        logo_path = os.path.join(home, '.qgis2', 'python', 'plugins', 'TinglysningGml', 'egedal_logo.jpg')
+        logo_path = self.settings.value('logo_path')
         logo.setPictureFile(logo_path)
         logo.setSceneRect(QRectF(0, 0, 57, 28))
         logo.setItemPosition(238, 179)
